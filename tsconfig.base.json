@@ -1,0 +1,51 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@student-service/course-lookup-api": [
+        "libs/course-lookup-api/src/index.ts"
+      ],
+      "@student-service/course-lookup-core": [
+        "libs/course-lookup-core/src/index.ts"
+      ],
+      "@student-service/student-enroll-api": [
+        "libs/student-enroll-api/src/index.ts"
+      ],
+      "@student-service/student-enroll-core": [
+        "libs/student-enroll-core/src/index.ts"
+      ],
+      "@student-service/student-profile-api": [
+        "libs/student-profile-api/src/index.ts"
+      ],
+      "@student-service/student-profile-core": [
+        "libs/student-profile-core/src/index.ts"
+      ],
+      "@student-service/student-store-mikroorm": [
+        "libs/student-store-mikroorm/src/index.ts"
+      ],
+      "@student-service/student-store-prisma": [
+        "libs/student-store-prisma/src/index.ts"
+      ],
+      "@student-service/student-wishlist-api": [
+        "libs/student-wishlist-api/src/index.ts"
+      ],
+      "@student-service/student-wishlist-core": [
+        "libs/student-wishlist-core/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
