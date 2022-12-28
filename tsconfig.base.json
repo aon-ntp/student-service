@@ -15,7 +15,24 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-    
+      "@student-service/student-profile-api": [
+        "libs/student-profile-api/src/index.ts"
+      ],
+      "@student-service/student-profile-core": [
+        "libs/student-profile-core/src/index.ts"
+      ],
+      "@student-service/student-store-mikroorm": [
+        "libs/student-store-mikroorm/src/index.ts"
+      ],
+      "@student-service/student-store-prisma": [
+        "libs/student-store-prisma/src/index.ts"
+      ],
+      "@student-service/student-wishlist-api": [
+        "libs/student-wishlist-api/src/index.ts"
+      ],
+      "@student-service/student-wishlist-core": [
+        "libs/student-wishlist-core/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
