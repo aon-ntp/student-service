@@ -18,6 +18,15 @@
         "jestConfig": "libs/student-store-prisma/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "prisma-migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx prisma migrate dev --name init --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": []

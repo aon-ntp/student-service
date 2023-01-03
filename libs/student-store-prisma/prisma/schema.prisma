@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model StudentProfile{
+  id String @id @default(uuid())
+  code Int @unique
+  fullName String 
+  address String? 
+  wishLists StudentWishList[]
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model StudentWishList{
+  id String @id @default(uuid())
+  profile StudentProfile @relation(fields: [profileId], references: [id])
+  profileId String
+  courseLookupId String 
+  courseLookup CourseLookup @relation(fields: [courseLookupId],references: [id])
+}
+
+model CourseLookup{
+   id String @id @default(uuid())
+   originalCourseId String @unique
+   title String @db.VarChar(255)
+   wishLists StudentWishList[]
+   createAt DateTime @default(now())
+   updateAt DateTime @updatedAt
+}
