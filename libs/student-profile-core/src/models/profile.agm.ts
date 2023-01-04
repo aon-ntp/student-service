@@ -15,11 +15,35 @@ export interface IProfileAGMProps{
 export type ProfileAGMMapper = (rawData:unknown) => ProfileAGM
 
 export class ProfileAGM extends AggregateRoot<IProfileAGMProps>{
-   
+    public get code() : number {
+        return this.props.code
+    }
+    
+
+    public get fullName() : string {
+        return this.props.fullName
+    }
+    
+    
+    public get birthDate() : Date {
+        return this.props.birthDate
+    }
+    
+
+    public get homePhone() : PhoneNoVO {
+        return this.props.homePhone
+    }
+    
+    
+    public get mobilePhone() : PhoneNoVO {
+        return this.props.mobileNo
+    }
+    
 
    private constructor(props:IProfileAGMProps,id?:UniqueEntityID){
         super(props,id)
     }
+
 
     public static create(props:IProfileAGMProps,id?:UniqueEntityID):Result<ProfileAGM>{
         try {      
