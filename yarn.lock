@@ -435,6 +435,16 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@inh-lib/common@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@inh-lib/common/-/common-0.1.2.tgz#cd431d9b296bd8fda8e294cfbf9473b41d49ac8d"
+  integrity sha512-yhmP3R9evcQFlvFF7NHP2+l6OaPwff771RglZkqcPGAm+lAI773QRGDyLiVugbfurtWOiPLtRe4uAxsyJZxSPg==
+
+"@inh-lib/ddd@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@inh-lib/ddd/-/ddd-0.1.2.tgz#35ee3077c8f40422f5ea0ea6e2ee87c9eff2b5da"
+  integrity sha512-mKDMi1CW4Caw/A6yUmwmZSWhQLWzsLNoZxoPjuRBzHCselLk8RwEpgZZM0+SHfXPRrDZlwuf7AE235dNo5ppsw==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -6407,6 +6417,11 @@ shallow-clone@^3.0.0:
   integrity sha512-/6KqX+GVUdqPuPPd2LxDDxzX6CAbjJehAAOKlNpqqUpAqPM6HeL8f+o3a+JsyGjn2lv0WY8UsTgUJjU9Ok55NA==
   dependencies:
     kind-of "^6.0.2"
+
+shallow-equal-object@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/shallow-equal-object/-/shallow-equal-object-1.1.1.tgz#0c016b8cc16dc59ab76739b6eeaa9c99d68beef7"
+  integrity sha512-9DDzYRlzCwF2CemeF0aOFk5T5KMrjG7HldcW7utwYhA/limuGHn3No8KhpDE8BrO7GLaSRJumNKReipZBybd7A==
 
 shebang-command@^2.0.0:
   version "2.0.0"
