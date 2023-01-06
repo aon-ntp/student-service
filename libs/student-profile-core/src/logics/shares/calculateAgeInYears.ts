@@ -1,3 +1,6 @@
+
+export type CalAgeType = (date:Date,currentDate:Date)=> number
+
 export function calculateAgeInYears (date:Date,currantDate:Date) {
     const now = currantDate;
     const current_year = now.getFullYear();

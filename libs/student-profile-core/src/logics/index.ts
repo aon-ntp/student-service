@@ -1,1 +1,2 @@
-export * from "./profileAgm.logics"
+export *  from "./profileAGM"
+

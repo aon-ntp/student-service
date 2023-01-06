@@ -1,4 +1,4 @@
-import { calculateAgeInYears } from '../../../src/logics/shares/calculateAgeInYears';
+import { calculateAgeInYears } from '../calculateAgeInYears';
 
 describe('test calculateAgeInYears', () => {
   it('correct', () => {

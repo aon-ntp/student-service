@@ -15,3 +15,10 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## How to run test
+
+for Unittest Run `yarn test <projectname> --testPathPattern '__test__'`
+
+
+for Integration-Test Run `yarn test <projectname> --testPathPattern 'integration-test'`

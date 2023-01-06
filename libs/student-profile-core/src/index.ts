@@ -1,4 +1,3 @@
-export * from './lib/student-profile-core';
 
 // export models
 export * from "./student-profile.repo"

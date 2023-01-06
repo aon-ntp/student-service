@@ -1,6 +1,6 @@
-import { PhoneNoVO, IPhoneNoVOProps } from '../../src/models/phoneNo.vo';
+import { PhoneNoVO, PhoneNoVOProps } from '../phoneNo.vo';
 
-import { isPhoneNo } from '../../src/logics/shares/isPhoneNo';
+import { isPhoneNo } from '../../logics/shares/isPhoneNo';
 
 describe('Test PhoneNoVO', () => {
   const spyFn = jest.spyOn({ isPhoneNo }, 'isPhoneNo');
@@ -11,7 +11,7 @@ describe('Test PhoneNoVO', () => {
 
   it('can create', () => {
     spyFn.mockReturnValue(true);
-    const props: IPhoneNoVOProps = { phoneNo: '0123456789' };
+    const props: PhoneNoVOProps = { phoneNo: '0123456789' };
 
     const voOrError = PhoneNoVO.createVO(props);
   
@@ -20,7 +20,7 @@ describe('Test PhoneNoVO', () => {
 
   it('can not create', () => {
     spyFn.mockReturnValue(false);
-    const props: IPhoneNoVOProps = { phoneNo: 'A123456789' };
+    const props: PhoneNoVOProps = { phoneNo: '1234567890' };
 
     const voOrError = PhoneNoVO.createVO(props);
   

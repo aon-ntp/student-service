@@ -1,5 +1,5 @@
 
-import { isPhoneNo } from '../../../src/logics/shares/isPhoneNo';
+import { isPhoneNo } from '../isPhoneNo';
 
 describe('test isPhoneNo', () => {
   it('correct format',  () => {
