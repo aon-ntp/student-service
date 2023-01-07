@@ -1,4 +1,4 @@
-import { execute, CanRegisterParams, makeCanRegister } from '../executor';
+import { executor, CanRegisterParams, makeCanRegister } from '../logic';
 
 const mockCalAgeFN = jest.fn();
 beforeEach(() => {
@@ -24,7 +24,7 @@ describe('Test execute', () => {
     };
 
     const exp = true;
-    const actual = execute(params);
+    const actual = executor(params);
 
     expect(actual.getValue()).toEqual(exp);
   });
@@ -38,7 +38,7 @@ describe('Test execute', () => {
     };
     const exp = false;
 
-    const actual = execute(params);
+    const actual = executor(params);
 
     expect(actual.getValue()).toEqual(exp);
   });

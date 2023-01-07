@@ -1,6 +1,6 @@
 import { Result } from '@inh-lib/common';
 import { ValueObject } from '@inh-lib/ddd';
-import { isPhoneNo } from '../logics/shares/isPhoneNo';
+import { isPhoneNo } from '../utils/isPhoneNo';
 
 export interface PhoneNoVOProps {
   phoneNo: string;

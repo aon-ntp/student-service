@@ -1,10 +1,9 @@
 
-// export models
+// export repo
 export * from "./student-profile.repo"
 
-//export repo
-export * from "./models/profile.agm"
+//export model
+export * from "./models"
 
+//export  logics
 export * from "./logics"
-
-// don't export logics

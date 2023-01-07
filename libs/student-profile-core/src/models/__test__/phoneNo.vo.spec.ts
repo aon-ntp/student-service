@@ -1,6 +1,6 @@
 import { PhoneNoVO, PhoneNoVOProps } from '../phoneNo.vo';
 
-import { isPhoneNo } from '../../logics/shares/isPhoneNo';
+import { isPhoneNo } from '../../utils/isPhoneNo';
 
 describe('Test PhoneNoVO', () => {
   const spyFn = jest.spyOn({ isPhoneNo }, 'isPhoneNo');

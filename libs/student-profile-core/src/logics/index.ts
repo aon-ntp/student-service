@@ -1,2 +1,3 @@
-export *  from "./profileAGM"
+export *  from "./register"
+export * from "./edit"
 
