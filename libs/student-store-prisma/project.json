@@ -27,6 +27,15 @@
         ],
         "parallel": false
       }
+    },
+    "prisma-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma generate --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": []

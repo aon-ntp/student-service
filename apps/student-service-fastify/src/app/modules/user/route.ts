@@ -1,12 +1,12 @@
-import { FastifyInstance } from "fastify";
+// import { FastifyInstance } from "fastify";
 
-import { registerUser } from "./controller";
+// import { registerUser } from "./controller";
 
-async function userRoutes(server:FastifyInstance){
+// async function userRoutes(server:FastifyInstance){
    
-    server.post("/",registerUser)
-}
+//     server.post("/",registerUser)
+// }
      
 
 
-export default userRoutes
+// export default userRoutes
