@@ -13,14 +13,14 @@ server.get('/healthcheck',async function() {
 return {status: "OK" }    
 })
 
-export async function start(opt : FastifyListenOptions = {port:3000,host:"0.0.0.0"}) {
-
+//Add Routes
 server.register(profileRoutes,{prefix:"/api/profile"})
 // server.register(userRoutes,{prefix:"/api/user"})
 // server.register(productRoutes,{prefix:"/api/product"})
 server.register(customerRoutes,{prefix:"/api/customer"})
 
 
+export async function start(opt : FastifyListenOptions = {port:3000,host:"0.0.0.0"}) {
 try {    
     await server.listen(opt) 
     console.log(`Student Service is start at http://localhost:${opt.port}`)
