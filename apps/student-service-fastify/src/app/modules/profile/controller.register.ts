@@ -48,7 +48,3 @@ function registerResponseDTOToHttp(result:RegisterResponseDTO,res:FastifyReply){
       }
         return res.status(200)
 }
-export async function editHandler(req:FastifyRequest,res:FastifyReply){
-
-    return res.status(200)
-}

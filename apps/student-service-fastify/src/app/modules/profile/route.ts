@@ -1,10 +1,12 @@
 import { FastifyInstance } from "fastify";
 
-import { registerHandler } from "./controller";
+import { editHandler } from "./controller.edit";
+import { registerHandler } from "./controller.register";
 
 async function profileRoutes(server:FastifyInstance){
    
     server.post("/",registerHandler)
+    server.put("/",editHandler)
 }
      
 
