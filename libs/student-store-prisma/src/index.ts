@@ -1,1 +1,1 @@
-export * from './lib/student-store-prisma';
+export * from "./repos/student-profile.repo"

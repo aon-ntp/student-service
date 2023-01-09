@@ -13,9 +13,12 @@ datasource db {
 
 model StudentProfile{
   id String @id @default(uuid())
-  code Int @unique
+  code Int @unique @default(autoincrement())
   fullName String 
   address String? 
+  homePhone String?
+  mobilePhone String
+  birthDate DateTime
   wishLists StudentWishList[]
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
