@@ -1,4 +1,3 @@
-
 // export repo
 export * from "./student-profile.repo"
 
@@ -7,3 +6,7 @@ export * from "./models"
 
 //export  logics
 export * from "./logics"
+
+
+export * from "./utils"
+    

@@ -1,7 +1,7 @@
 
-export type CalAgeType = (date:Date,currentDate:Date)=> number
+export type GetAgeType = (date:Date,currentDate:Date)=> number
 
-export function calculateAgeInYears (date:Date,currantDate:Date) {
+export function getAge (date:Date,currantDate:Date) {
     const now = currantDate;
     const current_year = now.getFullYear();
     const year_diff = current_year - date.getFullYear();

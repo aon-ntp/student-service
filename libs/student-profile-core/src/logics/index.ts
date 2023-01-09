@@ -1,3 +1,1 @@
-export *  from "./register"
-export * from "./edit"
-
+export * from "./getAge"

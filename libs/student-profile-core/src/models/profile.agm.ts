@@ -13,7 +13,7 @@ export interface ProfileAGMProps {
 }
 
 //Profile Type for Implementing mapper to DomainModel at Api,Store Layer
-export type ProfileAGMParser = <T>(rawData: T) => Result<ProfileAGM>;
+export type ProfileAGMParser<T> = (rawData: T) => Result<ProfileAGM>;
 
 export class ProfileAGM extends AggregateRoot<ProfileAGMProps> {
   public get code(): number {
