@@ -1,6 +1,6 @@
 import { Result } from '@inh-lib/common';
 import { ValueObject } from '@inh-lib/ddd';
-import { isPhoneNo } from '../utils/isPhoneNo';
+import { isPhoneNo } from '../logics/isPhoneNo';
 
 export interface PhoneNoVOProps {
   phoneNo: string;
@@ -9,7 +9,7 @@ export interface PhoneNoVOProps {
 export class PhoneNoVO extends ValueObject<PhoneNoVOProps> {
 
   public static createVO(props: PhoneNoVOProps): Result<PhoneNoVO> {
-    if (isPhoneNo(props.phoneNo)) {
+    if (isPhoneNo(props.phoneNo).getValue()) {
       const vo = new PhoneNoVO(props);
       return Result.ok<PhoneNoVO>(vo);
     }

@@ -1,1 +1,1 @@
-export * from './lib/student-profile-api';
+export * from "./command/register"

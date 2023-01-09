@@ -8,9 +8,20 @@ export namespace RegisterFailures{
     }
   }
 
-  export class YouDoesNotOldEnough extends Result<UseCaseError>{
-    constructor(){
-      super(false,{message:`You doesn't old enough`} as UseCaseError)
+  export class CanRegisterFail extends Result<UseCaseError>{
+    constructor(error?: string){
+      super(false,{message:`${error}`} as UseCaseError)
+    }
+  }
+  export class IsDuplicateFail extends Result<UseCaseError>{
+    constructor(error?: string){
+      super(false,{message:`${error}`} as UseCaseError)
+    }
+  }
+
+  export class ParserFail extends Result<UseCaseError>{
+    constructor(error?:string){
+      super(false,{message:`${error}`} as UseCaseError)
     }
   }
 }

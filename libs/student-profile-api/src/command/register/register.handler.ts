@@ -1,49 +1,64 @@
 import { Either, GenericAppError, left, Result, right } from "@inh-lib/common"
 import { UseCase } from "@inh-lib/ddd"
 
-import { IStudentProfileRepo,CanRegisterType, ProfileAGMParser } from "@student-service/student-profile-core";
+import { StudentProfileRepo, ProfileAGMParser } from "@student-service/student-profile-core";
 
 import { RegisterRequestDTO } from "./register.dto";
 import { RegisterFailures } from "./register.failures";
 
-export type RegisterResponseDTO = Either<GenericAppError.UnexpectedError | RegisterFailures.ProfileAlreadyExist | Result<unknown>, Result<void>>
+import {CanRegisterType} from "./validations.canRegister";
+import {  IsDuplicateType} from "./validations.isDuplicate";
+
+export type RegisterResponseDTO = Either<GenericAppError.UnexpectedError |RegisterFailures.CanRegisterFail | RegisterFailures.IsDuplicateFail | RegisterFailures.ParserFail | Result<unknown>, Result<unknown>>
 
 export class RegisterHandler implements UseCase<RegisterRequestDTO,Promise<RegisterResponseDTO>>{
-  private repo: IStudentProfileRepo
-  private mapper:ProfileAGMParser
+  private repo: StudentProfileRepo
+  private mapper:ProfileAGMParser<RegisterRequestDTO>
   private canRegister:CanRegisterType
+  private isDuplicate:IsDuplicateType
 
-  constructor(repo: IStudentProfileRepo,mapper:ProfileAGMParser,canRegister:CanRegisterType) {
+  constructor(repo:StudentProfileRepo,mapper:ProfileAGMParser<RegisterRequestDTO>,canRegister:CanRegisterType,isDuplicate:IsDuplicateType) {
     this.repo = repo;
     this.mapper = mapper
     this.canRegister=canRegister
+    this.isDuplicate=isDuplicate
+    
   }
+
   async execute(req: RegisterRequestDTO): Promise<RegisterResponseDTO>{
 
     //convert DTO to AGM
     const profileAGMOrError = this.mapper(req)
 
     if (profileAGMOrError.isFailure){
-      return left(Result.fail<void>(profileAGMOrError.error)) as RegisterResponseDTO
+      return left(new RegisterFailures.ParserFail(profileAGMOrError.error as string))
     }
 
     const profileAGM = profileAGMOrError.getValue()
     
 
     // Validate 
-    const okOrError = this.canRegister(profileAGM.birthDate)
-
-    if (okOrError.isFailure){
-      return left(Result.fail<void>(okOrError.error)) as RegisterResponseDTO
+    const toDay = new Date()
+    const canRegisterOrError = this.canRegister(profileAGM.birthDate,toDay)
+    if (canRegisterOrError.isLeft()){
+      return canRegisterOrError
+    }
+ 
+    const duplicateOrError = await this.isDuplicate(profileAGM.fullName)
+    if  (duplicateOrError.isLeft()){
+      return duplicateOrError
     }
 
+  
     // add ADM to Store
-    try{
-      await this.repo.add(profileAGM)
-    } catch(err) {
-      return left(new GenericAppError.UnexpectedError(err))
+    const createdOrError = await this.repo.create(profileAGM);
+
+    if(createdOrError.isFailure){
+      return left(new GenericAppError.UnexpectedError(createdOrError.error))
     }
+
 
     return right(Result.ok<void>())
   }
 }
+

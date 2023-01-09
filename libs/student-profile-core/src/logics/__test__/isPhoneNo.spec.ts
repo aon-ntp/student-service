@@ -7,7 +7,7 @@ describe('test isPhoneNo', () => {
     const phoneNo = '0891234567';
     const actual =  isPhoneNo(phoneNo);
 
-    expect(actual).toEqual(exp);
+    expect(actual.getValue()).toEqual(exp);
   });
 
   it('incorrect format',  () => {
@@ -15,6 +15,7 @@ describe('test isPhoneNo', () => {
     const phoneNo = 'A891234567';
     const actual =  isPhoneNo(phoneNo);
 
-    expect(actual).toEqual(exp);
+    expect(actual.getValue()).toEqual(exp);
   });
+
 });
