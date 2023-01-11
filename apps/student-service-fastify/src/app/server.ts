@@ -6,8 +6,8 @@ import profileRoutes from "./modules/profile/route"
 import customerRoutes from "./modules/customer/route";
 import multer from 'fastify-multer'
 
-const server = Fastify()
 
+const server = Fastify()
 server.register(multer.contentParser)
 server.get('/healthcheck',async function() {
 return {status: "OK" }    

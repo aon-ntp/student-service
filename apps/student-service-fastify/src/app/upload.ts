@@ -4,7 +4,7 @@ import multer from 'fastify-multer'
 // const ROOT_PATH = process.env.ROOT_PATH 
 
 const ROOT_PATH = __dirname;
-
+const maxSize = 50 * 1024 * 1024;
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, ROOT_PATH);
@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
 
   const upload = multer({
     storage,
+    limits: { fileSize: maxSize },
+
   }).single("file");
 
   export default  upload 
