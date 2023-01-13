@@ -19,20 +19,135 @@
         "passWithNoTests": true
       }
     },
-    "prisma-migrate": {
+    "prisma-gen-migration": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npx prisma migrate dev --name init --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+          "npx prisma migrate dev --name studentmsc --create-only --schema  ./libs/student-store-prisma/prisma/schema.prisma "
         ],
         "parallel": false
       }
     },
-    "prisma-generate": {
+    "prisma-dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate dev --name studentmsc --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    },
+    "prisma-deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate deploy --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    },
+  
+    "prisma-diff-modelToHistory": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate diff --from-schema-datamodel ./libs/student-store-prisma/prisma/schema.prisma --to-migrations ./libs/student-store-prisma/prisma/migrations --shadow-database-url $DATABASE_URL  --script > rollback.sql "
+        ],
+        "parallel": false
+      }
+    },
+    "prisma-diff-modelToDB": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate diff --from-schema-datamodel ./libs/student-store-prisma/prisma/schema.prisma --to-schema-datasource ./libs/student-store-prisma/prisma/schema.prisma --script > rollback.sql "
+        ],
+        "parallel": false
+      }
+    },
+   
+    "prisma-mark-upmigrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate resolve --applied {agrs.name}   --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    },
+  
+    "prisma-mark-downmigrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate resolve --rolled-back {args.name}   --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    },
+
+  
+    "prisma-status": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "yarn prisma migrate status --schema ./libs/student-store-prisma/prisma/schema.prisma"
+        ],
+        "parallel": false
+      }
+    },
+    "prisma-reset": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma migrate reset --schema  ./libs/student-store-prisma/prisma/schema.prisma"
+        ],
+        "parallel": false
+      }
+    },
+    
+    "prisma-generate-client": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           "prisma generate --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    },
+    "prisma-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma db push --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    },
+    "prisma-pull": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma db pull --force --schema  ./libs/student-store-prisma/prisma/schema.prisma "
+        ],
+        "parallel": false
+      }
+    }
+    , 
+    "prisma-execute-down": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma db execute --file ./libs/student-store-prisma/prisma/migrations/{args.name}/rollback.sql --schema ./libs/student-store-prisma/prisma/schema.prisma"
+        ],
+        "parallel": false
+      }
+    },
+    "prisma-execute-up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "prisma db execute --file ./libs/student-store-prisma/prisma/migrations/{args.name}/migration.sql --schema ./libs/student-store-prisma/prisma/schema.prisma"
         ],
         "parallel": false
       }
