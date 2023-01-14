@@ -7,7 +7,7 @@ export interface ProfileAGMProps {
   code: number;
   fullName: string;
   address: string;
-  homePhone?: PhoneNoVO;
+  homePhone?: PhoneNoVO | null;
   mobileNo: PhoneNoVO;
   birthDate: Date;
 }
@@ -23,12 +23,15 @@ export class ProfileAGM extends AggregateRoot<ProfileAGMProps> {
   public get fullName(): string {
     return this.props.fullName;
   }
+  public get address(): string {
+    return this.props.address;
+  }
 
   public get birthDate(): Date {
     return this.props.birthDate;
   }
 
-  public get homePhone(): PhoneNoVO {
+  public get homePhone(): PhoneNoVO | null | undefined {
     return this.props.homePhone;
   }
 
@@ -36,7 +39,7 @@ export class ProfileAGM extends AggregateRoot<ProfileAGMProps> {
     return this.props.mobileNo;
   }
 
-  private constructor(props: ProfileAGMProps, id?: UniqueEntityID) {
+  constructor(props: ProfileAGMProps, id?: UniqueEntityID) {
     super(props, id);
   }
 
@@ -44,8 +47,7 @@ export class ProfileAGM extends AggregateRoot<ProfileAGMProps> {
     props: ProfileAGMProps,
     id?: UniqueEntityID
   ): Result<ProfileAGM> {
-
-    //Validate Require fields
+    //Validate Not Null or Undefiend
     const guardProps = [
       { argument: props.fullName, argumentName: 'fullName' },
       { argument: props.address, argumentName: 'address' },
@@ -54,6 +56,25 @@ export class ProfileAGM extends AggregateRoot<ProfileAGMProps> {
     const guardResult = Guard.againstNullOrUndefinedBulk(guardProps);
     if (!guardResult.succeeded) {
       return Result.fail<ProfileAGM>(guardResult.message);
+    }
+
+    // Validate String empty
+    const fullNameHasValue = Guard.inRange(
+      props.fullName.length,
+      1,
+      255,
+      'fullName'
+    );
+    const addressHasValue = Guard.inRange(
+      props.address.length,
+      1,
+      255,
+      'address'
+    );
+    const hasValueResult = Guard.combine([fullNameHasValue, addressHasValue]);
+
+    if (!hasValueResult.succeeded) {
+      return Result.fail<ProfileAGM>(hasValueResult.message);
     }
 
     try {

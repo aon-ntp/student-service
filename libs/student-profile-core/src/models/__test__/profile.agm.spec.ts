@@ -7,8 +7,8 @@ describe('Test profileAGM', () => {
         code: 0,
         fullName: 'me',
         address:'asdfagsdfgkm',
-        mobileNo: PhoneNoVO.createVO({ phoneNo: '0123456789' }).getValue(),
-        birthDate: undefined,
+        mobileNo: PhoneNoVO.createVO({ phoneNo: '0123456789' }).getValue() as PhoneNoVO,
+        birthDate: new Date(2000,1,1),
       };
 
       const actual = ProfileAGM.create(props);
@@ -17,13 +17,26 @@ describe('Test profileAGM', () => {
       expect(actual.getValue()).toBeInstanceOf(ProfileAGM);
     });
 
-    it('fail', () => {
-        const props = {
+    it('fail when fullName is Empty ', () => {
+        const props:ProfileAGMProps = {
             code: 0,
             fullName: '',
-            address:undefined,
-            mobileNo: PhoneNoVO.createVO({ phoneNo: '0123456789' }).getValue(),
-            birthDate: undefined,
+            address:'abc',
+            mobileNo: PhoneNoVO.createVO({ phoneNo: '0123456789' }).getValue() as PhoneNoVO,
+            birthDate: new Date(2000,1,1),
+          };
+    
+          const actual = ProfileAGM.create(props);
+          
+          expect(actual.isSuccess).toBeFalsy();
+    });
+    it('fail when address is Empty ', () => {
+        const props:ProfileAGMProps = {
+            code: 0,
+            fullName: 'abc',
+            address:'',
+            mobileNo: PhoneNoVO.createVO({ phoneNo: '0123456789' }).getValue() as PhoneNoVO,
+            birthDate: new Date(2000,1,1),
           };
     
           const actual = ProfileAGM.create(props);

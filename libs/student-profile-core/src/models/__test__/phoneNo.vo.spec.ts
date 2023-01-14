@@ -19,9 +19,19 @@ describe('Test PhoneNoVO', () => {
     expect(voOrError.isSuccess).toBeTruthy();
   });
 
-  it('can not create', () => {
+  it('fail when value is empty', () => {
     spyFn.mockReturnValue(Result.ok(false));
-    const props: PhoneNoVOProps = { phoneNo: '1234567890' };
+    const props: PhoneNoVOProps = { phoneNo: '' };
+
+    const voOrError = PhoneNoVO.createVO(props);
+  
+    expect(voOrError.isFailure).toBeTruthy();
+  });
+
+  it('fail when value is undefiend', () => {
+    spyFn.mockReturnValue(Result.ok(false));
+    
+    const props: PhoneNoVOProps = { phoneNo: undefined };
 
     const voOrError = PhoneNoVO.createVO(props);
   
