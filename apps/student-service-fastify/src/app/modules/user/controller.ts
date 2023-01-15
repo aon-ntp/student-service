@@ -25,7 +25,7 @@ export async function login(req:FastifyRequest<{Body:IUserModel}>,reply:FastifyR
           }
     })
     console.log(user)
-    if(user.username === 'admin'){
+    if(user?.username === 'admin'){
         reply.status(200).send(user)
     }else {
         reply.send('Invalid username or password');

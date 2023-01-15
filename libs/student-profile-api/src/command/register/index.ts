@@ -1,10 +1,10 @@
 export * from "./register.dto"
 export * from "./register.failures"
-export * from "./register.handler"
+export {makeRegisterHandler} from "./register.handler"
 export * from "./register.mapper"
 
-export * from "./validations.canRegister"
-export * from "./validations.isDuplicate"
+// export * from "./validations.canRegister"
+// export * from "./validations.isDuplicate"
 
 
 

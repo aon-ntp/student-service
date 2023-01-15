@@ -5,7 +5,7 @@ import { RegisterFailures } from './register.failures';
 
 export type CanRegisterType = typeof canRegister;
 export type CanRegisterResult = Either<
-  RegisterFailures.CanRegisterFail | Result<unknown>,
+  RegisterFailures.CanRegisterFail | RegisterFailures.AgeUnderQualified,
   Result<boolean>
 >;
 
@@ -28,11 +28,12 @@ function executor(params: CanRegisterParams): CanRegisterResult {
   //find Age from birthaDate
     const ageOrError = calAgeFN(birthDate, toDay);
     if (ageOrError.isFailure){
-      return  left(new RegisterFailures.CanRegisterFail(ageOrError.error.toString()))
+      return  left(new RegisterFailures.CanRegisterFail(ageOrError.error?.toString()))
     }
     // if Age < 19 then cannot register
-    if (ageOrError.getValue() < 18) {
-      return left(Result.ok(false));
+    const age = ageOrError.getValue() as number
+    if (age < 18) {
+      return left(new RegisterFailures.AgeUnderQualified(`Age(age:${age}) must be greather than 17)`));
     }
 
  return right(Result.ok(true)) 

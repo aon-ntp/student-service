@@ -1,5 +1,6 @@
 /* eslint-disable */
 export default {
+  clearMocks:true,
   displayName: 'student-store-prisma',
   preset: '../../jest.preset.js',
   globals: {
@@ -13,4 +14,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/student-store-prisma',
+  setupFilesAfterEnv: ['<rootDir>/singleton.ts']
 };

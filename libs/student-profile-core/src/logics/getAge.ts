@@ -1,8 +1,9 @@
 import { Result } from '@inh-lib/common';
 
-export type GetAgeType = (date: Date, currentDate: Date) => Result<number>;
+export type GetAgeType = typeof getAge
 
-export function getAge(date: Date, currantDate: Date) {
+export function getAge(date: Date, currantDate: Date):Result<number> {
+
   try {
     const now = currantDate;
     const current_year = now.getFullYear();
@@ -18,6 +19,6 @@ export function getAge(date: Date, currantDate: Date) {
       ? Result.ok(year_diff)
       : Result.ok(year_diff - 1);
   } catch (error) {
-    Result.fail(error);
+   return Result.fail(error as Error);
   }
 }

@@ -48,5 +48,6 @@ describe('Test canRegister', () => {
 
 
     expect(actual.isRight()).toEqual(exp);
+    expect(actual.value).toBeInstanceOf(RegisterFailures.AgeUnderQualified)
   });
 });

@@ -13,6 +13,11 @@ export namespace RegisterFailures{
       super(false,{message:`${error}`} as UseCaseError)
     }
   }
+  export class AgeUnderQualified extends Result<UseCaseError>{
+    constructor(error?: string){
+      super(false,{message:`${error}`} as UseCaseError)
+    }
+  }
   export class IsDuplicateFail extends Result<UseCaseError>{
     constructor(error?: string){
       super(false,{message:`${error}`} as UseCaseError)

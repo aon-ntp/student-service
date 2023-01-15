@@ -1,1 +1,1 @@
-export * from "./repos/student-profile.repo"
+export * from "./modules/student-profile"

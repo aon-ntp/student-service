@@ -1,12 +1,12 @@
 import { Result } from '@inh-lib/common';
-import { UniqueEntityID } from '@inh-lib/ddd';
 import {
   ProfileAGMParser,
   ProfileAGM,
   ProfileAGMProps,
   PhoneNoVO,
 } from '@student-service/student-profile-core';
-import { RegisterRequestDTO } from './register.dto';
+
+import { RegisterRequestDTO, RegisterSuccessDTO } from './register.dto';
 
 export const parseReqToDTO: ProfileAGMParser<RegisterRequestDTO> = (
   rawData: RegisterRequestDTO
@@ -17,8 +17,12 @@ export const parseReqToDTO: ProfileAGMParser<RegisterRequestDTO> = (
   //Optional Field
   const homeOrError = rawData.homePhone
     ? PhoneNoVO.createVO({ phoneNo: rawData.homePhone })
-    : Result.ok(undefined);
+    : Result.ok(rawData.homePhone === null?null:undefined); // it should be null or undefiend
+  /*if homePhone is null then ORM will update set homephone = null 
+    and homePhone is undefiend Orm don't update homePhone in DB
+    */
 
+  
   const combineResult = Result.combine([mobileOrError, homeOrError]);
 
   if (combineResult.isFailure) {
@@ -27,16 +31,15 @@ export const parseReqToDTO: ProfileAGMParser<RegisterRequestDTO> = (
 
   try {
     const props: ProfileAGMProps = {
-      code: rawData.code,
+      code:0,
       fullName: rawData.fullName,
       address: rawData.address,
-      mobileNo: mobileOrError.getValue(),
+      mobileNo: mobileOrError.getValue() as PhoneNoVO,
       homePhone: homeOrError.getValue(),
       birthDate: rawData.birthDate,
     };
 
-    const uid = new UniqueEntityID(rawData.id);
-    const agmOrError = ProfileAGM.create(props, uid);
+    const agmOrError = ProfileAGM.create(props);
 
     if (agmOrError.isFailure) {
       return Result.fail(agmOrError.error);
@@ -47,3 +50,16 @@ export const parseReqToDTO: ProfileAGMParser<RegisterRequestDTO> = (
     return Result.fail(error);
   }
 };
+
+export function parseAGMToSuccessDTO(agm:ProfileAGM):Result<RegisterSuccessDTO>{
+
+  try {
+    const res:RegisterSuccessDTO={
+      code: agm.code,
+      id: agm.id.toValue() as string
+    }
+    return Result.ok(res)
+  } catch (error) {
+    return Result.fail(error)
+  }
+}
