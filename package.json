@@ -27,7 +27,7 @@
   "private": true,
   "dependencies": {
     "@inh-lib/common": "^0.1.2",
-    "@inh-lib/ddd": "^0.1.2",
+    "@inh-lib/ddd": "^0.2.0",
     "@prisma/client": "^4.8.0",
     "fastify": "^4.10.2",
     "fastify-file-upload": "^4.0.0",

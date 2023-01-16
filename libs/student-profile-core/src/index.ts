@@ -7,3 +7,4 @@ export * from "./models"
 //export  logics
 export * from "./logics"
 
+export * from "./events"
