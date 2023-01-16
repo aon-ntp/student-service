@@ -7,13 +7,15 @@ export const parseReqToDTO: CourseLookupAGMParser<CreateCourseLookupInputDTO> = 
 ):Result<CourseLookupAGM> =>{
   try {
     const props: CourseLookupAGMProps = {
-      name: rawData.name,
-      email: rawData.email,
-      role: rawData.role
+      originalCourseId: rawData.originalCourseId,
+      title: rawData.title,
+      wishLists: rawData.wishLists
     }
-    const agmOrError = CourseLookupAGM.create(props){
-
+    const agmOrError = CourseLookupAGM.create(props)
+    if (agmOrError.isFailure) {
+      return Result.fail(agmOrError.error);
     }
+    return Result.ok(agmOrError.getValue());
   }catch(error){
     return Result.fail(error)
   }

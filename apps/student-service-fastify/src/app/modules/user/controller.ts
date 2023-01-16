@@ -18,18 +18,18 @@ interface IUserQuery{
 
 export async function login(req:FastifyRequest<{Body:IUserModel}>,reply:FastifyReply) {
 
-    const {username,password} = req.body
-    const user = await client.user.findFirst({
-        where: {
-            username:username,
-          }
-    })
-    console.log(user)
-    if(user.username === 'admin'){
-        reply.status(200).send(user)
-    }else {
-        reply.send('Invalid username or password');
-    }
+    // const {username,password} = req.body
+    // const user = await client.user.findFirst({
+    //     where: {
+    //         username:username,
+    //       }
+    // })
+    // console.log(user)
+    // if(user.username === 'admin'){
+    //     reply.status(200).send(user)
+    // }else {
+    //     reply.send('Invalid username or password');
+    // }
 
 }
 
@@ -39,22 +39,22 @@ export async function getUser(req:FastifyRequest,reply:FastifyReply) {
 }
 
 export async function createUser(req:FastifyRequest<{Body: IUserModel,Headers: IHeaders}>,reply:FastifyReply) {
-    console.log(req)
-    try {
-        const user  =  await client.user.create({
-            data: {
-                username:req.body.username,
-                password:req.body.password
-            }
-        });
-        reply.status(200).send(user)
-    }
-    catch (e) {
-        console.log(e)
-        reply.status(400).send({
-            error:"not found"
-            })
-    }
+    // console.log(req)
+    // try {
+    //     const user  =  await client.user.create({
+    //         data: {
+    //             username:req.body.username,
+    //             password:req.body.password
+    //         }
+    //     });
+    //     reply.status(200).send(user)
+    // }
+    // catch (e) {
+    //     console.log(e)
+    //     reply.status(400).send({
+    //         error:"not found"
+    //         })
+    // }
   
 }
 

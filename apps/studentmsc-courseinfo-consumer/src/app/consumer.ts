@@ -1,5 +1,5 @@
 import { Kafka } from "kafkajs";
-import { Client } from 'pg';
+// import { Client } from 'pg';
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -39,7 +39,7 @@ export async function start() {
   await consumer.run({
     eachBatchAutoResolve: false,
     eachBatch: async result =>{
-      for (let i of result.batch.messages){
+      for (const i of result.batch.messages){
         if(!result.isRunning() || result.isStale()) break
 
         try{

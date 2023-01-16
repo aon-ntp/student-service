@@ -2,24 +2,24 @@ import { Guard, Result } from "@inh-lib/common"
 import { AggregateRoot, UniqueEntityID } from "@inh-lib/ddd"
 
 export interface CourseLookupAGMProps{
-  id?: number,
-  name: string,
-  email: string,
-  role: string
+  id?: string,
+  originalCourseId: string,
+  title: string,
+  wishLists?: string[],
 }
 
 export type CourseLookupAGMParser<T> = (rawData: T) => Result<CourseLookupAGM>
 
 
 export class CourseLookupAGM extends AggregateRoot<CourseLookupAGMProps>{
-  public get name(): string {
-    return this.props.name;
+  public get originalCourseId(): string {
+    return this.props.originalCourseId;
   }
-  public get email(): string {
-    return this.props.email;
+  public get title(): string {
+    return this.props.title;
   }
-  public get role(): string {
-    return this.props.role;
+  public get wishLists(): string[] {
+    return this.props.wishLists
   }
   private constructor(props: CourseLookupAGMProps, id?: UniqueEntityID) {
     super(props, id);
@@ -29,8 +29,8 @@ export class CourseLookupAGM extends AggregateRoot<CourseLookupAGMProps>{
     id?: UniqueEntityID
   ): Result<CourseLookupAGM>{
     const guardProps = [
-      { argument: props.name, argumentName: 'name' },
-      { argument: props.email, argumentName: 'email' },
+      { argument: props.originalCourseId, argumentName: 'originalCourseId' },
+      { argument: props.title, argumentName: 'title' },
     ];
     const guardResult = Guard.againstNullOrUndefinedBulk(guardProps);
     if (!guardResult.succeeded) {

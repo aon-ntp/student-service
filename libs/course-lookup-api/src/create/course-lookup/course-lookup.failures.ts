@@ -7,4 +7,10 @@ export namespace CreateFailures{
       super(false,{message:'CREATE_COURSE_LOOKUP_FAIL'} as UseCaseError)
     }
   }
+
+  export class ParserFail extends Result<UseCaseError>{
+    constructor(error?:string){
+      super(false,{message:`${error}`} as UseCaseError)
+    }
+  }
 }

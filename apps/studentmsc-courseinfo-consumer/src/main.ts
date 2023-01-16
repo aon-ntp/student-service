@@ -1,5 +1,5 @@
-import * as server from "./app/server";
-import * as producer from "./app/producer"
+// import * as server from "./app/server";
+// import * as producer from "./app/producer"
 import * as consumer from "./app/consumer"
 
 async function start(){

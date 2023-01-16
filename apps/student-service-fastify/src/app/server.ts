@@ -5,6 +5,7 @@ import profileRoutes from "./modules/profile/route"
 // import productRoutes from "./modules/product/route";
 import customerRoutes from "./modules/customer/route";
 import multer from 'fastify-multer'
+import { courseLookupRoutes } from "./modules/course-lookup/route";
 
 
 const server = Fastify()
@@ -18,6 +19,7 @@ server.register(profileRoutes, { prefix: "/api/profile" })
 // server.register(userRoutes,{prefix:"/api/user"})
 // server.register(productRoutes,{prefix:"/api/product"})
 server.register(customerRoutes, { prefix: "/api/customer" })
+server.register(courseLookupRoutes,{prefix: "/api/course-lookup"})
 
 
 export async function start(opt: FastifyListenOptions = { port: 3000, host: "0.0.0.0" }) {

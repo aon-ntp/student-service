@@ -1,16 +1,22 @@
 import { z } from "zod"
 import { buildJsonSchemas } from "fastify-zod"
 
-const courseLookupInput = {
-  name : z.string(),
-  email: z.string(),
-  role: z.enum(["USER","ADMIN"])
-}
+// export const courseLookupInputSchema = z.object({
+//   name : z.string(),
+//   email: z.string(),
+//   role: z.enum(["USER","ADMIN"])
+// })
 
-const createCourseLookupInputSchema = z.object({...courseLookupInput})
+export const courseLookupInputSchema = z.object({
+  originalCourseId : z.string(),
+  title: z.string(),
+  wishLists: z.array(z.string()).optional()
+})
 
-export type CreateCourseLookupInputDTO = z.infer<typeof createCourseLookupInputSchema>
+// const createCourseLookupInputSchema = z.object({...courseLookupInputSchema})
+
+export type CreateCourseLookupInputDTO = z.infer<typeof courseLookupInputSchema>
 
 export const { schemas: productSchemas, $ref} = buildJsonSchemas({
-  createCourseLookupInputSchema
+  courseLookupInputSchema
 })

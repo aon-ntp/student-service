@@ -17,7 +17,7 @@ export async function start() {
   await producer.connect().then(() => {
     console.log("Connected Producer!")
   })
-  let msgs = [{
+  const msgs = [{
     value: {
       name: 'aon',
       email: 'test'
