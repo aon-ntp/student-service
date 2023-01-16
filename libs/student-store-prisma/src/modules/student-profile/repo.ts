@@ -2,6 +2,9 @@ import { Result } from '@inh-lib/common';
 import { UniqueEntityID } from '@inh-lib/ddd';
 import { Prisma, StudentProfile } from '@prisma/client';
 
+//import dbhook for prisma trigger DomainEventHandler
+import "./dbhooks";
+
 import {
   StudentProfileRepo,
   ProfileAGM
@@ -32,7 +35,6 @@ export class StudentProfileRepoEmpl implements StudentProfileRepo {
       return Result.fail(error);
     }
 
-    console.log('prrofile ',profile)
 
     // convert PrismaModel to DomainModel
     const agmResult = mapper.studentProfileToAGM(profile)

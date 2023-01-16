@@ -1,5 +1,5 @@
 import {  GenericAppError, left, right } from "@inh-lib/common"
-import { UseCase } from "@inh-lib/ddd"
+import { DomainEvents, UniqueEntityID, UseCase } from "@inh-lib/ddd"
 
 import { StudentProfileRepo, ProfileAGMParser, ProfileAGM, getAge } from "@student-service/student-profile-core";
 
@@ -66,7 +66,9 @@ export class RegisterHandler implements UseCase<RegisterRequestDTO,Promise<Regis
       return left(new RegisterFailures.ParserFail(successDTO.error as string))
     }
 
-    return right(successDTO.getValue() as RegisterSuccessDTO)
+    const res = successDTO.getValue() as RegisterSuccessDTO
+
+    return right(res)
   }
 
 }
