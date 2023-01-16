@@ -1,6 +1,6 @@
 import { Either, GenericAppError, left, Result, right } from "@inh-lib/common";
 import { UseCase } from "@inh-lib/ddd";
-import { CourseLookupAGMParser, CourseLookupRepo } from "@student-service/course-lookup-core";
+import { CourseLookupAGM, CourseLookupAGMParser, CourseLookupRepo } from "@student-service/course-lookup-core";
 import { CreateCourseLookupInputDTO } from "./course-lookup.dto";
 import { CreateFailures } from "./course-lookup.failures";
 
@@ -23,7 +23,7 @@ export class CourseLookupHandler implements UseCase<CreateCourseLookupInputDTO,P
       return left(new CreateFailures.ParserFail(courseLookupAGMOrError.error as string))
     }
     
-    const courseLookupAGM = courseLookupAGMOrError.getValue()
+    const courseLookupAGM = courseLookupAGMOrError.getValue() as CourseLookupAGM
 
     const createOrError = await this.repo.create(courseLookupAGM)
 

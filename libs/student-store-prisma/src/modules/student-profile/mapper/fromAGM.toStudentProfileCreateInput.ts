@@ -8,7 +8,7 @@ export function agmToStudentProfileCreateInput(agm: ProfileAGM):Result<Prisma.St
     Item= {
       fullName: agm.fullName,
       address:agm.address,
-      mobilePhone: agm.mobilePhone.props.phoneNo,
+      mobilePhone: agm.mobilePhone.props.phoneNo as string,
       homePhone: agm.homePhone === null ? null : agm.homePhone?.props.phoneNo,
       birthDate: agm.birthDate,
     }; 

@@ -11,14 +11,14 @@ export async function createCourseLookup(req: FastifyRequest, reply: FastifyRepl
 
   let dto: CreateCourseLookupInputDTO
   try {
+    
     dto = courseLookupInputSchema.parse(req.body)
+    const result = await handler.execute(dto)
+    createCourseLookupResponseDTOToHttp(result, reply)
   } catch (error) {
     reply.status(400)
   }
 
-  const result = await handler.execute(dto)
-
-  createCourseLookupResponseDTOToHttp(result, reply)
 }
 
 function createCourseLookupResponseDTOToHttp(result: CourseLookupResponseDTO, reply: FastifyReply) {

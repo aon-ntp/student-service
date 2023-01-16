@@ -19,7 +19,7 @@ export class CourseLookupAGM extends AggregateRoot<CourseLookupAGMProps>{
     return this.props.title;
   }
   public get wishLists(): string[] {
-    return this.props.wishLists
+    return this.props.wishLists as string[]
   }
   private constructor(props: CourseLookupAGMProps, id?: UniqueEntityID) {
     super(props, id);
