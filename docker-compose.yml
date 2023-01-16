@@ -16,6 +16,44 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  postgres2:
+    container_name: postgres_student_service_2
+    image: postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - ./data/postgres2:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  zookeeper:
+    container_name: zookeeper_1
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+  kafka:
+    # container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=localhost
+      - KAFKA_ADVERTISED_PORT=9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=false
+      - KAFKA_BROKER_ID=1
+      - KAFKA_DELETE_TOPIC_ENABLE=true
+      - KAFKA_offsets_topic_replication_factor=1 # value 1 because only 1 cluster
+      # - KAFKA_LISTENERS=PLAINTEXT://:9092
+      # - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.55:9092
 
   # postgres2:
   #   container_name: postgres_smartmore_identity

@@ -10,35 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model StudentProfile{
-  id String @id @default(uuid())
-  code Int @unique @default(autoincrement())
-  fullName String 
-  address String? 
-  homePhone String?
-  mobilePhone String? @default(dbgenerated())
-  birthDate DateTime?
-  wishLists StudentWishList[]
-  createAt DateTime @default(now())
-  updateAt DateTime? @updatedAt
+model Temp {
+  id   String @id
+  code String
 }
 
-model StudentWishList{
-  id String @id @default(uuid())
-  profile StudentProfile @relation(fields: [profileId], references: [id])
-  profileId String
-  courseLookupId String 
-  courseLookup CourseLookup @relation(fields: [courseLookupId],references: [id])
+//Student_entity
+model StudentProfile {
+  id          String            @id @default(uuid())
+  code        Int               @unique @default(autoincrement())
+  fullName    String
+  address     String?
+  homePhone   String?
+  mobilePhone String
+  birthDate   DateTime
+  wishLists   StudentWishList[]
+  createAt    DateTime          @default(now())
+  updateAt    DateTime          @updatedAt
 }
 
-model CourseLookup{
-   id String @id @default(uuid())
-   originalCourseId String @unique
-   title String @db.VarChar(255)
-   wishLists StudentWishList[]
-   createAt DateTime @default(now())
-   updateAt DateTime @updatedAt
+//Student_wish_list
+model StudentWishList {
+  id             String         @id @default(uuid())
+  profile        StudentProfile @relation(fields: [profileId], references: [id])
+  profileId      String
+  courseLookup   CourseLookup   @relation(fields: [courseLookupId], references: [id])
+  courseLookupId String
+}
+
+//Course_entity ฝั่ง student
+model CourseLookup {
+  id               String            @id @default(uuid())
+  originalCourseId String            @unique
+  title            String            @db.VarChar(255)
+  wishLists        StudentWishList[]
+  createAt         DateTime          @default(now())
+  updateAt         DateTime          @updatedAt
 }
 
 // model Product {
@@ -50,25 +57,101 @@ model CourseLookup{
 //   price Float
 // }
 
+/////////////////////////////////////////////////////////////
+
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  profile Profile?
+  post    Post[]
+  role    Role     @default(USER)
+  tel     String?
+  test    String
+}
+
+// model Test {
+//   id   Int    @id @default(autoincrement())
+//   name String
+// }
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+//### Implicit Many to Many
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  title     String
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+
+  categories Category[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  posts Post[]
+}
+
+//### Implicit End
+
+//### Explicit Many to Many Section
+//https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations
+
+model Book {
+  id             Int              @id @default(autoincrement())
+  title          String
+  booksOnAuthors BooksOnAuthors[]
+}
+
+model Author {
+  id             Int              @id @default(autoincrement())
+  name           String
+  BooksOnAuthors BooksOnAuthors[]
+}
+
+model BooksOnAuthors {
+  book     Book   @relation(fields: [bookId], references: [id])
+  bookId   Int
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  @@id([bookId, authorId])
+}
+
+//### Explicit End
+//#####################################################################
+
 model Customer {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  firstname String @db.VarChar(255)
-  fullname String @db.VarChar(255)
-
+  firstname String   @db.VarChar(255)
+  fullname  String   @db.VarChar(255)
 }
 
 model Product {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  firstname String @db.VarChar(255)
-  fullname String @db.VarChar(255)
+  firstname String   @db.VarChar(255)
+  fullname  String   @db.VarChar(255)
 }
 
-model user {
-  id Int @id @default(autoincrement())
-  username String @db.VarChar(255)
-  password String @db.VarChar(255)
-}
+// model user {
+//   id       Int    @id @default(autoincrement())
+//   username String @db.VarChar(255)
+//   password String @db.VarChar(255)
+// }

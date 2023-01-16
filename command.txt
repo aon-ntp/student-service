@@ -1,0 +1,30 @@
+Initialise prisma
+npx prisma init --datasource-provider postgresql
+
+Prisma generate
+npx prisma generate
+
+Migrate the schema
+npx prisma migrate dev --name [migrate name]
+
+Create Migrate Only
+npx prisma migrate --create-only 
+
+Deploy to Prd (use in CI/CD)
+npx prisma migrate deploy
+
+generate migrate down 
+https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/generating-down-migrations#how-to-generate-and-run-down-migrations
+
+1. edit schema ex. add field,rename column,add relation etc.
+2. generate down script with command
+npx prisma migrate diff --from-schema-datamodel prisma/schema.prisma --to-schema-datasource prisma/schema.prisma --script > down.sql
+ 3. generate migrate up script
+ npx prisma migrate dev --name [migrate name]
+ 4. copy down.sql to folder migrate in (3.)
+
+ execute migrate down script
+ npx prisma db execute --file [{directory of}./down.sql] --schema prisma/schema.prisma
+
+
+ npx prisma migrate resolve --rolled-back 20230113114307_test

@@ -1,0 +1,60 @@
+{
+  "name": "studentmsc-courseinfo-consumer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/studentmsc-courseinfo-consumer/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/studentmsc-courseinfo-consumer",
+        "main": "apps/studentmsc-courseinfo-consumer/src/main.ts",
+        "tsConfig": "apps/studentmsc-courseinfo-consumer/tsconfig.app.json",
+        "assets": ["apps/studentmsc-courseinfo-consumer/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/studentmsc-courseinfo-consumer/src/environments/environment.ts",
+              "with": "apps/studentmsc-courseinfo-consumer/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "studentmsc-courseinfo-consumer:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "studentmsc-courseinfo-consumer:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/studentmsc-courseinfo-consumer/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/studentmsc-courseinfo-consumer/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

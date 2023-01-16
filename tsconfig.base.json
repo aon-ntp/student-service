@@ -16,6 +16,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@student-service/course-lookup-api": [
+        "libs/course-lookup-api/src/index.ts"
+      ],
+      "@student-service/course-lookup-core": [
+        "libs/course-lookup-core/src/index.ts"
+      ],
       "@student-service/crud-api": ["libs/crud-api/src/index.ts"],
       "@student-service/crud-core": ["libs/crud-core/src/index.ts"],
       "@student-service/crud-core-api": ["libs/crud-core-api/src/index.ts"],
