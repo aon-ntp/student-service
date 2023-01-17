@@ -1,5 +1,6 @@
 import { Guard, Result } from '@inh-lib/common';
 import { AggregateRoot, UniqueEntityID } from '@inh-lib/ddd';
+import { StudentProfileCreatedEvent } from '../events';
 
 import { PhoneNoVO } from './phoneNo.vo';
 
@@ -79,6 +80,8 @@ export class ProfileAGM extends AggregateRoot<ProfileAGMProps> {
 
     try {
       const agm = new ProfileAGM(props, id);
+      
+      agm.addDomainEvent(new StudentProfileCreatedEvent(agm))
       return Result.ok<ProfileAGM>(agm);
     } catch (error) {
       return Result.fail<ProfileAGM>(error.message);
