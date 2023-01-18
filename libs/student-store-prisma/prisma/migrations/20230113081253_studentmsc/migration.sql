@@ -30,4 +30,4 @@ CREATE TABLE "Product" (
 );
 
 -- AddForeignKey
-ALTER TABLE "StudentWishList" ADD CONSTRAINT "StudentWishList_courseLookupId_fkey" FOREIGN KEY ("courseLookupId") REFERENCES "CourseLookup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ALTER TABLE "StudentWishList" ADD CONSTRAINT "StudentWishList_courseLookupId_fkey" FOREIGN KEY ("courseLookupId") REFERENCES "CourseLookup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,5 +1,5 @@
 -- DropForeignKey
-ALTER TABLE "StudentWishList" DROP CONSTRAINT "StudentWishList_courseLookupId_fkey";
+-- ALTER TABLE "StudentWishList" DROP CONSTRAINT "StudentWishList_courseLookupId_fkey";
 
 -- AlterTable
 ALTER TABLE "StudentProfile" DROP COLUMN "birthDate",
